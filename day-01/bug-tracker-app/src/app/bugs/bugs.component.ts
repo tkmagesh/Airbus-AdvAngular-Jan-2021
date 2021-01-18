@@ -9,6 +9,8 @@ export class BugsComponent implements OnInit {
 
   bugsList : any[] = [];  
   
+  newBugName : string = '';
+
   constructor() { }
 
   ngOnInit(): void {
@@ -19,14 +21,15 @@ export class BugsComponent implements OnInit {
   }
 
   getClosedCount():number { 
+    console.log('getClosedCount triggered');
     return  this.bugsList.reduce((result, bug) => bug.isClosed ? result + 1 : result, 0);
   }
 
-  onAddNewClick(bugName : string){
+  onAddNewClick(){
     const newBugId = this.bugsList.reduce((bug, result) => bug.id > result ? bug.id : result, 0) + 1;
     const newBug = {
       id : newBugId,
-      name : bugName,
+      name : this.newBugName,
       isClosed : false,
       createdAt : new Date()
     };
