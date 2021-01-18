@@ -11,6 +11,8 @@ export class BugsComponent implements OnInit {
   
   newBugName : string = '';
 
+  sortAttr : string = '';
+  
   constructor() { }
 
   ngOnInit(): void {

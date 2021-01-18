@@ -5,10 +5,11 @@
 </section>
 <section>
     <label for="">Order By :</label>
-    <select name="" id="">
-        <option value=""></option>
-        <option value=""></option>
-        <option value=""></option>
+    <select (change)="sortAttr = $event.target.value">
+        <option value="id">Id</option>
+        <option value="name">Name</option>
+        <option value="isClosed">Status</option>
+        <option value="createdAt">CreatedAt</option>
     </select>
     <label for="">Descending ?:</label>
     <input type="checkbox" name="" id="">
@@ -21,12 +22,12 @@
 </section>
 <section class="list">
     <ol>
-        <li *ngFor="let bug of bugsList">
+        <li *ngFor="let bug of ( bugsList | sort:sortAttr )">
             <span class="bugname"
                 [ngClass]="{closed : bug.isClosed}"  
                 (click)="onBugNameClick(bug)"  
             >{{bug.name}}</span>
-            <div class="datetime">{{bug.createdAt | elapsed}}</div>
+            <div class="datetime" [title]="bug.createdAt">{{bug.createdAt | elapsed}}</div>
             <input type="button" value="Remove" (click)="onRemoveClick(bug)">
         </li>
         
