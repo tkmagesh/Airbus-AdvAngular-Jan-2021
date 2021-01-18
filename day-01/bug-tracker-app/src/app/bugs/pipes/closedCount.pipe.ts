@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from "@angular/core";
 })
 export class ClosedCountPipe implements PipeTransform { 
     transform( list : any[]) : number {
-        console.log('getClosedCount triggered');
+        console.log('closedCount.pipe triggered');
         return  list.reduce((result, bug) => bug.isClosed ? result + 1 : result, 0);
     }
 }

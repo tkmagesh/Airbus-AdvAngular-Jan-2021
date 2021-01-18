@@ -14,10 +14,10 @@ export class BugsComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.bugsList.push({id : 1, name : 'Server communication failure', isClosed  : false, createdAt : new Date()});
-    this.bugsList.push({id : 2, name : 'Data Integrity checks failed', isClosed  : true, createdAt : new Date()});
-    this.bugsList.push({id : 3, name : 'User actions not recognized', isClosed  : true, createdAt : new Date()});
-    this.bugsList.push({id : 4, name : 'Application not responding', isClosed  : false, createdAt : new Date()});
+    this.bugsList.push({id : 1, name : 'Server communication failure', isClosed  : false, createdAt : new Date('1-jan-2020')});
+    this.bugsList.push({id : 2, name : 'Data Integrity checks failed', isClosed  : true, createdAt : new Date('1-Apr-2020')});
+    this.bugsList.push({id : 3, name : 'User actions not recognized', isClosed  : true, createdAt : new Date('1-Oct-2020')});
+    this.bugsList.push({id : 4, name : 'Application not responding', isClosed  : false, createdAt : new Date('1-Jan-2021')});
   }
 
   getClosedCount():number { 
@@ -33,7 +33,8 @@ export class BugsComponent implements OnInit {
       isClosed : false,
       createdAt : new Date()
     };
-    this.bugsList.push(newBug);
+    //this.bugsList.push(newBug);
+    this.bugsList = [...this.bugsList, newBug];
   }
 
   onRemoveClick(bugToRemove : any){
@@ -44,8 +45,10 @@ export class BugsComponent implements OnInit {
     this.bugsList = this.bugsList.filter(bug => !bug.isClosed);
   }
 
-  onBugNameClick(bug : any){
-    bug.isClosed = !bug.isClosed;
+  onBugNameClick(bugToToggle : any){
+    //bug.isClosed = !bug.isClosed;
+    const toggledBug = { ...bugToToggle, isClosed : !bugToToggle.isClosed};
+    this.bugsList = this.bugsList.map(bug => bug.id === bugToToggle.id ? toggledBug : bug);
   }
 
   
