@@ -22,7 +22,8 @@
     <ol>
         <li *ngFor="let bug of bugsList">
             <span class="bugname"
-                [ngClass]="{closed : bug.isClosed}"    
+                [ngClass]="{closed : bug.isClosed}"  
+                (click)="onBugNameClick(bug)"  
             >{{bug.name}}</span>
             <div class="datetime">{{bug.createdAt | date}}</div>
             <input type="button" value="Remove" (click)="onRemoveClick(bug)">

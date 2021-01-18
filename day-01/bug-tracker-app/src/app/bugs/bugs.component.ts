@@ -40,4 +40,10 @@ export class BugsComponent implements OnInit {
   onRemoveClosedClick() {
     this.bugsList = this.bugsList.filter(bug => !bug.isClosed);
   }
+
+  onBugNameClick(bug : any){
+    bug.isClosed = !bug.isClosed;
+  }
+
+  
 }
