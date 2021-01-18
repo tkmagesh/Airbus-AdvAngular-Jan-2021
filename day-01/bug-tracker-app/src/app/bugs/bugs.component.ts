@@ -12,6 +12,7 @@ export class BugsComponent implements OnInit {
   newBugName : string = '';
 
   sortAttr : string = '';
+  sortDesc : boolean = false;
   
   constructor() { }
 
