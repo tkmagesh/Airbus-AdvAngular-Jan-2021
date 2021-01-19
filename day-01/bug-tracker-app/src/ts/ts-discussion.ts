@@ -104,3 +104,4 @@ function pluck<T, TKey extends keyof T>(list : T[], attrName : TKey) : T[TKey][]
         result.push(item[attrName])
     return result;
 }
+

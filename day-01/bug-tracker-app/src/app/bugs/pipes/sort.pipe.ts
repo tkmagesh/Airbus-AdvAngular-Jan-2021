@@ -1,12 +1,14 @@
 import { Pipe, PipeTransform } from "@angular/core";
 
+type Comparer<T> = (p1 : T, p2 : T) => -1 | 0 | 1;
+
 @Pipe({
     name :'sort'
 })
-export class SortPipe implements PipeTransform{
+export class SortPipe<T, TKey extends keyof T>implements PipeTransform{
 
-    private getComparerFor(attrName : string, isDesc : boolean){
-        const comparer = function(p1 : any, p2:any){
+    private getComparerFor(attrName : TKey, isDesc : boolean) : Comparer<T>{
+        const comparer : Comparer<T> = (p1 : T, p2 : T) : -1 | 0 | 1  => {
             if (p1[attrName] < p2[attrName]) return -1;
             if (p1[attrName] > p2[attrName]) return 1;
             return 0;
@@ -17,12 +19,15 @@ export class SortPipe implements PipeTransform{
         return comparer;
     }
 
-    private getDescComparerFor(comparer : any) : any {
-        return function(p1 : any, p2:any){
-            return comparer(p1, p2) * -1;
+    private getDescComparerFor(comparer : Comparer<T>) : Comparer<T> {
+        return (p1 : T, p2: T) : -1 | 0 | 1 => {
+            //return comparer(p1, p2) * -1;
+            if (comparer(p1, p2) === -1) return 1;
+            if (comparer(p1, p2) === 1) return -1;
+            return 0;
         }
     }
-    transform(list: any[], attrName : string, isDesc : boolean = false) {
+    transform(list: T[], attrName : TKey, isDesc : boolean = false) : T[] {
         if (!list || !list.length || !attrName) return list;
         return list.sort(this.getComparerFor(attrName, isDesc));
     }
