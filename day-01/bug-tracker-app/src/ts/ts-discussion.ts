@@ -1,3 +1,5 @@
+import { zip } from "rxjs";
+
 var numbers = [ 3,1,5,2,4];
 
 export interface Bug {
@@ -26,9 +28,31 @@ const bugNames = map<Bug, string>(bugsList, transformBugToNames);
 
 //Write the typesafe implementation of 'reduce' function
 
-function reduce<T, TResult>(list : T[], reducerFn : (TResult, T) => TResult, initialResult : TResult) : TResult{
+function reduce<T, TResult>(list : T[], reducerFn : (x : TResult, y : T) => TResult, initialResult : TResult) : TResult{
     let result : TResult = initialResult;
     for(let item of list)
         result = reducerFn(result, item)
+    return result;
+}
+
+var letters = ['a', 'b', 'c', 'd', 'e'];
+//var numbers = [ 3,1,5,2,4];
+
+zip(letters, numbers)
+    => [
+        ['a', 3],
+        ['b', 1],
+        ['c', 5],
+        ....
+    ]
+
+//write the typesafe implementation of the zip function
+
+function zip<T1, T2>(list1 : T1[], list2 : T2[]) : ([T1, T2])[] {
+    const length = Math.min(list1.length, list2.length);
+    const result : ([T1, T2])[] = [];
+    for(let index = 0; index < length; index++){
+        result.push([list1[index], list2[index]])
+    }
     return result;
 }
