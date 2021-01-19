@@ -105,3 +105,54 @@ function pluck<T, TKey extends keyof T>(list : T[], attrName : TKey) : T[TKey][]
     return result;
 }
 
+
+//Type Constructors
+//Partial Type
+
+
+
+/* interface Bug {
+  id : number;
+  name : string;
+  isClosed : boolean;
+  createdAt : Date
+} */
+
+/* interface PartialBug {
+    id? : number,
+    name? : string,
+    isClosed? : boolean,
+    createdAt? : Date
+} */
+
+/* type PartialBug = {
+    [Key in keyof Bug]? : Bug[Key]
+} */
+
+type Partial<T> = {
+    [Key in keyof T] ? : T[Key]
+}
+
+type ReadOnly<T> = {
+    readonly [Key in keyof T] : T[Key]
+}
+
+const partialBug : Partial<Bug> = {
+    isClosed : true
+};
+
+interface BugApi{
+    getAll() : Bug[],
+    post(bug : Bug) : Bug,
+    put(id : number, bug : Bug) : Bug,
+    remove(id : number) : void | Promise<any>,
+    patch(id : number, bug : Partial<Bug>) : Bug
+}
+
+/*
+serverBug = { id : 100, name : 'Server Bug', isClosed : false, createdAt : new Date() };
+
+operation -> patch(100, {isClosed : true})
+
+serverBug updated to 
+    { id : 100, name : 'Server Bug', isClosed : true, createdAt : new Date() };
