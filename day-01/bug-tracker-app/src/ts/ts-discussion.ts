@@ -56,3 +56,37 @@ function zip<T1, T2>(list1 : T1[], list2 : T2[]) : ([T1, T2])[] {
     }
     return result;
 }
+
+// Type Constraints
+
+interface FormField<T extends number | string | boolean>{
+    value? : T,
+    defaultValue : T,
+    isValid : boolean
+}
+
+function getFieldValue<T extends number | string | boolean>(field : FormField<T>) : T {
+    return field.value ?? field.defaultValue;
+}
+
+//index query operator
+
+type BugKeys = keyof Bug;
+//BugKeys = "id" | "name" | "isClosed" | "createdAt"
+//attributes of the Bug type
+
+
+
+function getAttribute<T, TKey extends keyof T>(bug : T, attrName : TKey) : T[TKey] {
+    return bug[attrName];
+} 
+
+
+const bug : Bug = {
+    id : 100,
+    name : 'Server communication failure', 
+    isClosed : false, 
+    createdAt : new Date()
+}
+
+const dummy = getAttribute(bug, "id");
