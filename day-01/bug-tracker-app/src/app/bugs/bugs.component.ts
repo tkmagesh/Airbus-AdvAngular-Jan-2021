@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Bug } from './models/bug';
+import { BugList } from './models/bugList'
 
 @Component({
   selector: 'app-bugs',
@@ -7,13 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BugsComponent implements OnInit {
 
-  bugsList : any[] = [];  
+  bugsList : BugList = [];  
   
   newBugName : string = '';
 
   sortAttr : string = '';
   sortDesc : boolean = false;
-  
+
   constructor() { }
 
   ngOnInit(): void {
@@ -29,8 +31,8 @@ export class BugsComponent implements OnInit {
   }
 
   onAddNewClick(){
-    const newBugId = this.bugsList.reduce((bug, result) => bug.id > result ? bug.id : result, 0) + 1;
-    const newBug = {
+    const newBugId = this.bugsList.reduce((result, bug) => bug.id > result ? bug.id : result, 0) + 1;
+    const newBug : Bug = {
       id : newBugId,
       name : this.newBugName,
       isClosed : false,
@@ -40,7 +42,7 @@ export class BugsComponent implements OnInit {
     this.bugsList = [...this.bugsList, newBug];
   }
 
-  onRemoveClick(bugToRemove : any){
+  onRemoveClick(bugToRemove : Bug){
     this.bugsList = this.bugsList.filter(bug => bug.id !== bugToRemove.id);
   }
 
@@ -48,11 +50,11 @@ export class BugsComponent implements OnInit {
     this.bugsList = this.bugsList.filter(bug => !bug.isClosed);
   }
 
-  onBugNameClick(bugToToggle : any){
+  onBugNameClick(bugToToggle : Bug){
     //bug.isClosed = !bug.isClosed;
     const toggledBug = { ...bugToToggle, isClosed : !bugToToggle.isClosed};
     this.bugsList = this.bugsList.map(bug => bug.id === bugToToggle.id ? toggledBug : bug);
   }
 
-  
+
 }
