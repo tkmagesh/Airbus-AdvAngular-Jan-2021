@@ -90,3 +90,17 @@ const bug : Bug = {
 }
 
 const dummy = getAttribute(bug, "id");
+
+//convert the follwing into a typesafe function
+
+const bugs : Bug[] = [ /*  bugs with ids 100, 101, 102, 103 */];
+
+const bugIds = pluck(bugs, "id") 
+/* bugIds = [100, 101, 102, 103 ] */
+
+function pluck<T, TKey extends keyof T>(list : T[], attrName : TKey) : T[TKey][]{
+    let result : T[TKey][] = [];
+    for(let item of list)
+        result.push(item[attrName])
+    return result;
+}
