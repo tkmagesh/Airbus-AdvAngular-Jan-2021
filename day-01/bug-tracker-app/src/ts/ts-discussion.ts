@@ -262,8 +262,36 @@ type IteratorResult<T, TResult> =
         OrderDelivered (deliveryDate)
 */
 
+type ContactInfo = 
+    | { kind : 'email'; email : string}
+    | { kind : 'postal'; address : string}
+    | { kind : 'emailAndPostal'; email : string, postal : string}
+
+type CustomerType = {
+    name : string;
+    constact : ContactInfo
+}
+
+type PaidOrderData = { paymentDate : Date, amount : number };
+type SentOrderData = { sentDate : Date };
+type DeliveredOrderData = { deliveryDate : Date }
+
+type OrderState = 
+    | { kind : 'new' }
+    | { kind : 'paid'; paidData : PaidOrderData }
+    | { kind : 'sent'; paidData : PaidOrderData; sentData : SentOrderData }
+    | { 
+        kind : 'delivered', 
+        paidData : PaidOrderData; 
+        sentData : SentOrderData, 
+        deliveryData : DeliveredOrderData
+        };
+
 type Order = {
+    id : number;
+    customer : CustomerType;
     productName : string;
     quantity : number;
     price : number;
+    orderState : OrderState;
 }
