@@ -4,12 +4,17 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
 
-import Math from './app/utils/math';
 
+import Math from './app/utils/math';
 const math = new Math(100);
+
+const math2 = new Math(200);
+
+/* 
+
 console.log(math.add(100,200));
 console.log(math.subtract(100,200));
-
+ */
 if (environment.production) {
   enableProdMode();
 }

@@ -1,4 +1,4 @@
-export function log(message) {
+export function log(message : string) {
     return function (
         target : Object /* prototype of the class */, 
         propertyKey : string /* name of the method */, 
@@ -10,7 +10,7 @@ export function log(message) {
         descriptor.value = function(...args){
             console.log(`${propertyKey} ${message}` );
             return originalFn(...args);
-        }
+        };
     };
 }
 

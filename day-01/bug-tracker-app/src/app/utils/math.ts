@@ -20,3 +20,9 @@ class Math{
 Math.prototype["id"] = 100;
 
 export default Math;
+
+/* 
+
+
+
+*/
