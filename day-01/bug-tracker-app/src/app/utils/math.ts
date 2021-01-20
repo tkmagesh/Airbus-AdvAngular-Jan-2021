@@ -1,5 +1,8 @@
 import { log } from './log';
+import { logClass } from './logClass';
+import { registerEndPoint} from './registerEndPoint';
 
+@registerEndPoint('calculator')
 class Math{
 
     constructor(private id : number){
@@ -16,8 +19,6 @@ class Math{
         return x - y;
     }
 }
-
-Math.prototype["id"] = 100;
 
 export default Math;
 
