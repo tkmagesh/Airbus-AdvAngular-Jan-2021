@@ -156,3 +156,114 @@ operation -> patch(100, {isClosed : true})
 
 serverBug updated to 
     { id : 100, name : 'Server Bug', isClosed : true, createdAt : new Date() };
+
+*/
+
+//Compose Types
+    //Union of Types
+    //Intersection of Types
+
+
+//Union of Types
+interface Foo{
+    foo : string,
+    xyz : string
+}
+
+interface Bar{
+    bar : string,
+    xyz : string
+}
+
+//Union
+const sayHello = (obj : Foo | Bar) : any => {/* 
+ */}
+
+ sayHello({ foo : 'foo', xyz : 'something'})
+ sayHello({ bar : 'bar', xyz : 'something'})
+
+ //intersection
+ const sayHello2 = (obj : Foo & Bar) : any => {
+     /*  */
+ }
+
+ sayHello2({ foo : 'foo', xyz : 'something', bar : 'bar'})
+
+//Discriminated Union Types
+
+/* 
+interface Customer {
+    name : string;
+    email? : string;
+    phone? : string;
+} 
+*/
+
+/* 
+interface Customer {
+    name : string,
+    contact : string | number;
+} 
+*/
+
+interface EmailContact{
+    kind : 'email';
+    email : string;
+}
+
+interface PhoneContact{
+    kind : 'phone';
+    phone : string;
+}
+
+type Contact = 
+    | EmailContact 
+    | PhoneContact ;
+
+interface Customer{
+    name : string,
+    contact : Contact
+}
+
+function displayCustomerContact(customer : Customer){
+    const { contact } = customer;
+    if (contact.kind === 'email'){
+        console.log(contact.email)
+    } else {
+        console.log(contact.phone);
+    }
+}
+
+/* Iterator Return Type */
+
+interface IteratorYieldResult<TResult>{
+    done : false;
+    value : TResult
+}
+
+interface IteratorReturnResult<TResult{
+    done : true;
+    value : TResult;
+}
+
+type IteratorResult<T, TResult> = 
+    | IteratorYieldResult<TResult> 
+    | IteratorReturnResult<TResult>
+
+/* 
+    Domain:
+        Users place orders for products. User have contact information, email or postal address and at least one is required. Orders should include name, quantity, payment date, paid amount, sending date, delivery date
+
+    Models : User, Product, Contact, Order etc
+
+    Info for different states
+        OrderPaid (paymentDate, amount)
+        OrderSent (sentDate)
+        OrderDelivered (deliveryDate)
+*/
+
+type Order = {
+    productName : string;
+    quantity : number;
+    price : number;
+}
