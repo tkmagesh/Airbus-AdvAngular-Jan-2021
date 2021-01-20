@@ -316,7 +316,13 @@ type B = IsString<number>
 
 //type Not<T> = never; /* to be implemented */
 type Not<T> = T extends false ? true : false;
-type Or<T> = never; /* to be implemented */
+//type Or<T> = never; /* to be implemented */
+type Or<T> = 
+    T extends [true, true] ? true
+    : T extends [true, false] ? true
+    : T extends [false, true] ? true
+    : T extends [false, false] ? false
+    : never;
 
 /*
 const foo : Not<true> = false;
@@ -327,3 +333,34 @@ const bar1 : Or<[true, false]> = true;
 const bar2 : Or<[true, true]> = true;
 const bar3 : Or<[false, true]> = true;
 const bar4 : Or<[false, false]> = false;
+
+//Builtin conditional types
+
+//Exclude
+
+type X = Exclude<'A' | 'B' | 1 | 2, 1 | 2>
+
+interface Product{
+    id : number;
+    name : string;
+    cost : number;
+}
+
+var p = { id : 100, name : 'Pen', cost : 10 }
+
+//runtime check
+/* 
+function safeSet(obj, attrName, value){
+    if (attrName === 'id') return;
+    obj[attrName] = value;
+}
+
+
+safeSet(p, 'id', 200); 
+*/
+
+function safeSet<T, TKey extends Exclude<keyof T, 'id'>>(obj : T, key : TKey, value : T[TKey]){
+    obj[key] = value;
+}
+
+safeSet(p, 'id', 200);
