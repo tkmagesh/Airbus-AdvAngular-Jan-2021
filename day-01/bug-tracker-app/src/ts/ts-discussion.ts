@@ -295,3 +295,35 @@ type Order = {
     price : number;
     orderState : OrderState;
 }
+
+function processOrder(order : Order, orderAction : OrderState){
+    if (orderAction.kind === 'new'){
+        /*  */
+    } else if (orderAction.kind === 'paid'){
+
+    }
+}
+
+//Conditional Types
+//Type creation based on a condition
+
+type IsString<T> = T extends string ? true : false;
+
+type A = IsString<string>
+type B = IsString<number>
+
+/*  */
+
+//type Not<T> = never; /* to be implemented */
+type Not<T> = T extends false ? true : false;
+type Or<T> = never; /* to be implemented */
+
+/*
+const foo : Not<true> = false;
+const foo : Not<false> = true;
+*/
+
+const bar1 : Or<[true, false]> = true;
+const bar2 : Or<[true, true]> = true;
+const bar3 : Or<[false, true]> = true;
+const bar4 : Or<[false, false]> = false;
