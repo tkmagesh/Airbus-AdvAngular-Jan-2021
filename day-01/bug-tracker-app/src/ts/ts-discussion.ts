@@ -1,4 +1,3 @@
-import { zip } from "rxjs";
 
 var numbers = [ 3,1,5,2,4];
 
@@ -38,13 +37,13 @@ function reduce<T, TResult>(list : T[], reducerFn : (x : TResult, y : T) => TRes
 var letters = ['a', 'b', 'c', 'd', 'e'];
 //var numbers = [ 3,1,5,2,4];
 
-zip(letters, numbers)
+/* zip(letters, numbers)
     => [
         ['a', 3],
         ['b', 1],
         ['c', 5],
         ....
-    ]
+    ] */
 
 //write the typesafe implementation of the zip function
 
@@ -359,8 +358,68 @@ function safeSet(obj, attrName, value){
 safeSet(p, 'id', 200); 
 */
 
+type MyExclude<T, U> = T extends U ? never : T;
+
 function safeSet<T, TKey extends Exclude<keyof T, 'id'>>(obj : T, key : TKey, value : T[TKey]){
     obj[key] = value;
 }
 
-safeSet(p, 'id', 200);
+//safeSet(p, 'id', 200);
+
+//Extract
+type MyExtract<T, U> = T extends U ? T : never;
+
+type X1 = MyExtract<'A'|'B'|'C', 'C'>
+
+interface MyObj {
+    foo : string,
+    bar : number,
+    1 : number,
+    42 : number
+}
+
+function setStringAttr<T, TKey extends MyExtract<keyof T, string>>(obj : T, key : TKey, value : T[TKey]){
+    obj[key] = value
+}
+
+var myObj : MyObj = { 
+    foo : 'foo',
+    bar : 123,
+    1 : 100,
+    42 : 42
+} 
+
+setStringAttr(myObj, 'foo', 'something') // OK
+//setStringAttr(myObj, 1, 100) // NOT OK
+
+//Omit
+ interface Person{
+     id : number;
+     name : string;
+     age : number;
+ }
+
+ //type AnonPerson = Omit<Person, 'id'>
+ type AnonPerson = Pick<Person, 'name' | 'age'>
+
+ //var anon : AnonPerson = { id : 100} //NOT OK
+
+
+ //infer 
+ //Use the type as a variable in the type definitions
+
+ type MyParameters<T extends (...args : any) => any> = T extends (...args: infer P) => any ? P : never;
+
+ const sayHelloNew = (name : string, age : number) => `Hello ${name}, your age is ${age}`;
+
+ type SayHelloNewParams = MyParameters<typeof sayHelloNew>
+
+ type MyReturnType<T extends (...args : any ) => any> = T extends (...args : any ) => infer R ? R : never;
+
+ const add = (x : number, y : number ) : number => x + y;
+
+ type AddResult = MyReturnType<typeof add>
+
+ //Decorators
+
+
