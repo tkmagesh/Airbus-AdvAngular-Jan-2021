@@ -1,12 +1,15 @@
-import { Pipe, PipeTransform } from "@angular/core";
-import * as moment from 'moment';
+import { Inject, Pipe, PipeTransform } from "@angular/core";
+import { MOMENT_API } from '../../tokens'
 
 @Pipe({
     name : 'elapsed'
 })
 export class ElapsedPipe implements PipeTransform {
+    constructor(@Inject(MOMENT_API) private moment : Function){
+
+    }
     transform(value : Date) : string {
-        return moment(value).fromNow();
+        return this.moment(value).fromNow();
     }
     
 }
