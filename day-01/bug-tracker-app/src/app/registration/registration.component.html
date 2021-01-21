@@ -1,0 +1,59 @@
+<h3>Registration</h3>
+<hr>
+<form #registrationForm="ngForm">
+    {{ registrationModel | json }}
+    <div class="field">
+        <label for="">User Name :</label>
+        <input 
+            type="text" 
+            name="username" 
+            #txtUserName="ngModel"
+            required 
+            [(ngModel)]="registrationModel.userName"
+            [class.is-invalid]="txtUserName.touched && txtUserName.invalid"
+        >
+        <div>
+            <small class="errorMessage"
+                [class.d-none]="txtUserName.valid || txtUserName.untouched"
+            >
+                Username is required!
+            </small>
+        </div>
+        <!-- <div>
+            <div>Touched : {{txtUserName.touched}}</div>
+            <div>Untouched : {{txtUserName.untouched}}</div>
+            <div>Dirty : {{txtUserName.dirty}}</div>
+            <div>Pristine : {{txtUserName.pristine}}</div>
+            <div>Valid : {{txtUserName.valid}}</div>
+            <div>Invalid : {{txtUserName.invalid}}</div>
+        </div> -->
+    </div>
+    <div class="field">
+        <label for="">Email : </label>
+        <input type="email" name="email" [(ngModel)]="registrationModel.email">
+    </div>
+    <div class="field">
+        <label for="">Phone :</label>
+        <input type="tel" name="phone" [(ngModel)]="registrationModel.phone">
+    </div>
+    <div class="field">
+        <label for="">Communication Convenience :</label>
+        <select name="commConvenience" [(ngModel)]="registrationModel.communication">
+            <option value="">---Select---</option>
+            <option value="morning">Morning</option>
+            <option value="evening">Evening</option>
+        </select>
+    </div>
+    <div class="field">
+        <input type="checkbox" name="subscribe" [(ngModel)]="registrationModel.subscribe">
+        <label for="" style="display:inline">Subscribe for promotions</label>
+    </div>
+   <!--  <div ngModelGroup="address">
+        <input type="text" name="street" ngModel/>
+        <input type="text" name="city" ngModel />
+        <input type="text" name="postal" ngModel />
+    </div> -->
+    <div class="field">
+        <input type="submit" value="Submit">
+    </div>
+</form>

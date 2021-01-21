@@ -17,6 +17,8 @@ import { MOMENT_API } from './tokens'
 import * as moment from 'moment';
 import { Moment } from 'moment';
 
+import { RegistrationComponent } from './registration/registration.component';
+
 //moment factory
 function createMoment() : Function{
   console.log('moment instance created');
@@ -30,7 +32,8 @@ function createMoment() : Function{
     ClosedCountPipe,
     ElapsedPipe,
     SortPipe,
-    BugCreateComponent
+    BugCreateComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,

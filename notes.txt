@@ -1,0 +1,20 @@
+Forms
+    Data Binding
+    Change Tracking
+    Validation
+    Visual Feedback
+    Error Messages
+    Handle Form Submission
+
+
+Template Driven Form (TDF) AND Reactive Forms
+
+TDF
+    form logic in the component template
+    dynamic forms is difficult to achieve
+    custom validation is difficult to implement
+    unit testing is not possible, only e2e testing is possible
+
+Reactive Form
+    Form is driven by the model
+    FormBuilder
