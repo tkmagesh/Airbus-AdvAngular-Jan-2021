@@ -15,6 +15,10 @@ TDF
     custom validation is difficult to implement
     unit testing is not possible, only e2e testing is possible
 
+visited - ng-untouched, ng-touched
+changed - ng-pristine, ng-dirty
+valid - ng-invalid, ng-valid  
+
 Reactive Form
     Form is driven by the model
     FormBuilder
