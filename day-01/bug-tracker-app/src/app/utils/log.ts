@@ -7,7 +7,7 @@ export function log(message : string) {
     {
         console.log(target, propertyKey, descriptor);
         const originalFn = descriptor.value;
-        descriptor.value = function(...args){
+        descriptor.value = function(...args : any[]){
             console.log(`${propertyKey} ${message}` );
             return originalFn(...args);
         };

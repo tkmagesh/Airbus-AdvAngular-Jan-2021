@@ -1,7 +1,7 @@
 <section class="stats">
-    <span class="closed">{{ bugsList | closedCount }}</span>
+    <span class="closed">{{ bugOperations.bugsList | closedCount }}</span>
     <span> / </span>
-    <span>{{bugsList.length}}</span>
+    <span>{{bugOperations.bugsList.length}}</span>
 </section>
 <section>
     <label for="">Order By :</label>
@@ -22,11 +22,11 @@
 </section>
 <section class="list">
     <ol>
-        <li *ngFor="let bug of ( bugsList | sort:sortAttr:sortDesc )">
+        <li *ngFor="let bug of ( bugOperations.bugsList | sort:sortAttr:sortDesc )">
             <span class="bugname"
                 [ngClass]="{closed : bug.isClosed}"  
                 (click)="onBugNameClick(bug)"  
-            >{{bug.name}}</span>
+            >{{bug.name}} - <small>[ {{bug.id}} ]</small></span>
             <div class="datetime" [title]="bug.createdAt">{{bug.createdAt | elapsed}}</div>
             <input type="button" value="Remove" (click)="onRemoveClick(bug)">
         </li>

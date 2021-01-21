@@ -9,19 +9,25 @@ import { ClosedCountPipe } from './bugs/pipes/closedCount.pipe';
 import { ElapsedPipe } from './bugs/pipes/elapsed.pipe';
 import { SortPipe } from './bugs/pipes/sort.pipe';
 
+import { BugOperationsService } from './bugs/services/bugOperations.service';
+import { BugCreateComponent } from './bugs/components/createBug.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     BugsComponent,
     ClosedCountPipe,
     ElapsedPipe,
-    SortPipe
+    SortPipe,
+    BugCreateComponent
   ],
   imports: [
     BrowserModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    BugOperationsService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

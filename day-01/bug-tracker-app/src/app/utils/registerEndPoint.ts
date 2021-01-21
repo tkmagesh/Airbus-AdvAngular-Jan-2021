@@ -1,4 +1,5 @@
-let endPoints : { [key: string]: string } = {}
+//let endPoints : { [key: string]: string } = {}
+let endPoints : Record<string, string> = {}
 
 export function registerEndPoint(customEndPointName? : string){
     return function(klass : Function){ /* class decorator */
