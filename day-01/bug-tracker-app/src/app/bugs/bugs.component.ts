@@ -22,6 +22,7 @@ export class BugsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.bugOperations.load();
   }
 
   /* getClosedCount():number { 
