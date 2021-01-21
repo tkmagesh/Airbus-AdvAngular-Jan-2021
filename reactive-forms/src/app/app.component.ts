@@ -69,16 +69,19 @@ export class AppComponent implements OnInit {
   }
 
   loadAPIData() {
-    // this.registrationForm.setValue({
-    //   userName: 'Bruce',
-    //   password: 'test',
-    //   confirmPassword: 'test',
-    //   address: {
-    //     city: 'City',
-    //     state: 'State',
-    //     postalCode: '123456'
-    //   }
-    // });
+     /* this.registrationForm.setValue({
+       userName: 'Bruce',
+       password: 'test',
+       confirmPassword: 'test',
+       address: {
+         city: 'City',
+         state: 'State',
+         postalCode: '123456'
+       },
+       subscribe : false,
+       email : 'xyz@example',
+       alternateEmails : ['abc@example']
+     }); */
 
     this.registrationForm.patchValue({
       userName: 'Bruce',
