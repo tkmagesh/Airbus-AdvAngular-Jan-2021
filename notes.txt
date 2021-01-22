@@ -22,3 +22,96 @@ valid - ng-invalid, ng-valid
 Reactive Form
     Form is driven by the model
     FormBuilder
+
+
+Data Server
+from the folder that has the db.json file, run the following command
+    npx json-server db.json -p 4000
+
+
+Async Operation
+    Initiated but not waited for its completion (Non Blocking)
+
+    1. callback
+    2. EventEmitter
+    3. Promise
+    4. Async Await
+    5. generator
+    6. Observable
+
+Observable X Enumerable
+    Iterator + Lazy evaluation
+
+
+
+let nos = [3,1,4,2,5]
+for(let index = 0, count = nos.length; index < count; index++){
+    let no = nos[index];
+}
+
+class NoIterator{
+    _index = 0;
+    _count = 0;
+    _list;
+
+    constructor(list){
+        this._list = list;
+        this._index = 0;
+        this._count = _list.length;
+    }
+
+    next(){
+        ++this._index;
+        if (this._index < this._count){
+            return this._list[this._index]
+        } else {
+
+        }
+    }
+}
+
+function getEvenNumbers(nos){
+    var noIterator = new NoIterator(nos)
+    var result = [];
+    while(let no = noIterator.next()){
+        if (no % 2 === 0){
+            result.push(no);
+        }
+    }
+    return result;
+}
+
+Event Driven Applications
+
+employees.dat
+id, name, salary, doj, dob
+
+Avg salary of the employees
+
+    var total = 0,
+        count = 0;
+    open file
+    while (!eof){
+        line = read line
+        sal = parse line
+        total += sal
+        ++count;
+    }
+    avg = total / count
+    close file
+    return avg
+
+promise - singular response
+Observable - stream of events
+
+Source of async
+    UI Events (keyboard, mouse) - stream
+    timer events - stream
+    Ajax requests (singular)
+    Server Sent Events (SSE) - stream
+    Web Sockets - stream
+    Dom Updates
+    
+rxjs
+    Observable, operators
+    https://rxjs.dev/

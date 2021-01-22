@@ -4,9 +4,64 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Async Demos</title>
-    <script src="async-demos.js"></script>
+    <!-- <script src="async-demos.js"></script> -->
+    <script>
+        (function(){
+            window.addEventListener('load', onDocumentLoad);
+            function onDocumentLoad(){
+                var btnDoWork = document.getElementById('btnDoWork');
+                btnDoWork.addEventListener('click', onBtnDoWorkClick);
+            }
+
+            function onBtnDoWorkClick(){
+                displayMessage('Work Started');
+                doWork(onCompleteCallback, onProgressCallback);
+            }
+
+            function onProgressCallback(percentCompleted){
+                document.getElementById('workProgress').value = percentCompleted;
+            }
+
+            function onCompleteCallback(){
+                displayMessage('Work Completed');
+            }
+
+            function doWork(completeCallback, progresssCallback){
+                var totalIterations = 1000,
+                    currentIteration = 0;
+                    
+                function oneIteration(){    
+                    for(var i=0; i< (20000/totalIterations); i++)
+                    for(var j=0; j < 20000; j++)
+                    for(var k = 0; k<100;k++){
+
+                    }
+                    ++currentIteration;
+                    var percentCompleted = (currentIteration/totalIterations) * 100;
+                    progresssCallback(percentCompleted);
+                    if (currentIteration < totalIterations){
+                        setTimeout(oneIteration)
+                    } else {
+                        completeCallback();
+                    }
+                }
+
+                setTimeout(oneIteration)
+            }
+
+            function displayMessage(msg){
+                var divMessages = document.getElementById('divMessages');
+                divMessages.innerHTML += msg + '<br/>'
+            }
+        })()
+
+    </script>
 </head>
 <body>
     <h1>Async Demos</h1>
+    <input type="text" name="" id="">
+    <input type="button" value="Do Work" id="btnDoWork">
+    <div id="divMessages"></div>
+    <progress id="workProgress" min="0" max="100" value="0"></progress>
 </body>
 </html>

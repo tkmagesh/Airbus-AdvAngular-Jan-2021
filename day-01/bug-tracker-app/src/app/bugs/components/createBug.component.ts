@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { Bug } from '../models/bug';
 import { BugOperationsService } from '../services/bugOperations.service';
 
 @Component({
@@ -17,12 +18,17 @@ import { BugOperationsService } from '../services/bugOperations.service';
 export class BugCreateComponent{
     newBugName : string = '';
 
+    @Output()
+    bugCreated : EventEmitter<Bug> = new EventEmitter<Bug>();
+
     constructor(private _bugOperations : BugOperationsService){
 
     }
 
     onAddNewClick(){
-        const newBug = this._bugOperations.createNew(this.newBugName);
+        this._bugOperations
+            .createNew(this.newBugName)
+            .subscribe(newBug => this.bugCreated.emit(newBug))
         //this.bugsList.push(newBug);
         //this.bugsList = [...this.bugsList, newBug];
     }

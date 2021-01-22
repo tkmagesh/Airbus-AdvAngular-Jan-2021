@@ -4,34 +4,46 @@
       "id": 1,
       "name": "Server communicaiton failure",
       "isClosed": false,
-      "createdAt": "2020-12-11T08:52:54.021Z"
+      "createdAt": "2020-12-11T08:52:54.021Z",
+      "active": true
     },
     {
       "id": 3,
       "name": "Data integrity checks failed",
-      "isClosed": false,
+      "isClosed": true,
       "createdAt": "2020-12-11T10:39:20.648Z",
-      "desc": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur aliquam id pariatur ipsa expedita nesciunt doloribus facilis architecto quisquam totam veniam odio, minima, labore deleniti, neque nam quia amet eveniet."
+      "desc": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur aliquam id pariatur ipsa expedita nesciunt doloribus facilis architecto quisquam totam veniam odio, minima, labore deleniti, neque nam quia amet eveniet.",
+      "active": false
     },
     {
       "id": 4,
       "name": "User actions not recognized",
       "isClosed": false,
-      "createdAt": "2021-01-08T08:22:19.152Z"
+      "createdAt": "2021-01-08T08:22:19.152Z",
+      "active": false
     },
     {
       "id": 5,
       "name": "User actions not recognized",
       "isClosed": false,
       "createdAt": "2021-01-11T05:28:42.900Z",
-      "desc": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur aliquam id pariatur ipsa expedita nesciunt doloribus facilis architecto quisquam totam veniam odio, minima, labore deleniti, neque nam quia amet eveniet."
+      "desc": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur aliquam id pariatur ipsa expedita nesciunt doloribus facilis architecto quisquam totam veniam odio, minima, labore deleniti, neque nam quia amet eveniet.",
+      "active": true
     },
     {
       "id": 6,
       "name": "Application not responding",
       "isClosed": true,
       "createdAt": "2021-01-11T05:29:07.308Z",
-      "desc": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur aliquam id pariatur ipsa expedita nesciunt doloribus facilis architecto quisquam totam veniam odio, minima, labore deleniti, neque nam quia amet eveniet."
+      "desc": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur aliquam id pariatur ipsa expedita nesciunt doloribus facilis architecto quisquam totam veniam odio, minima, labore deleniti, neque nam quia amet eveniet.",
+      "active": true
+    },
+    {
+      "id": 7,
+      "name": "Events are not triggered",
+      "isClosed": false,
+      "createdAt": "2021-01-22T07:09:08.334Z",
+      "active": true
     }
   ],
   "projects": [

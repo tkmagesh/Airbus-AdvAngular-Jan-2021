@@ -1,5 +1,6 @@
 
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Bug } from '../models/bug';
 import { BugList } from '../models/bugList';
 import { BugApiService } from './bugApi.service'
@@ -8,39 +9,38 @@ import { BugApiService } from './bugApi.service'
 export class BugOperationsService{
 
     //To be removed after implementing the server side communication
-    private _currentBugId = 0;
-    public bugsList : BugList = [];  
+   /*  private _currentBugId = 0;
+    public bugsList : BugList = [];   */
 
     constructor(private _bugApi : BugApiService){
 
     }
 
-    load(){
-        this._bugApi
-            .getAll()
-            .subscribe(bugs => this.bugsList = bugs);
+    load() : Observable<Bug[]> {
+        return this._bugApi.getAll()
     }
 
-    createNew(newBugName : string) : void {
+    createNew(newBugName : string) : Observable<Bug> {
         const newBug : Bug = {
-            id : ++this._currentBugId,
+            id : 0,
             name : newBugName,
             isClosed : false,
-            createdAt : new Date()
+            createdAt : new Date(),
+            active : true
         };
-        this.bugsList = [...this.bugsList, newBug];
+        return this._bugApi.save(newBug);
     }
     
-    toggle(bugToToggle : Bug) : void {
+    toggle(bugToToggle : Bug) : Observable<Bug> {
         const toggledBug = { ...bugToToggle, isClosed : !bugToToggle.isClosed};
-        this.bugsList = this.bugsList.map(bug => bug.id === bugToToggle.id ? toggledBug : bug);
+        return this._bugApi.save(toggledBug)
     }
 
-    remove(bugToRemove : Bug) : void {
-        this.bugsList = this.bugsList.filter(bug => bug.id !== bugToRemove.id);
+    remove(bugToRemove : Bug) : Observable<any> {
+        return this._bugApi.remove(bugToRemove);
     }
     removeClosed() : void {
-        this.bugsList = this.bugsList.filter(bug => !bug.isClosed);
+        /* to be done */
     }
 
     

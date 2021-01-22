@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Bug } from './models/bug';
 import { BugList } from './models/bugList'
 import { BugOperationsService } from './services/bugOperations.service';
@@ -10,9 +11,9 @@ import { BugOperationsService } from './services/bugOperations.service';
 })
 export class BugsComponent implements OnInit {
 
-  
-  
   newBugName : string = '';
+
+  bugs$ ?: Observable<Bug[]> ;
 
   sortAttr : string = '';
   sortDesc : boolean = false;
@@ -22,7 +23,11 @@ export class BugsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.bugOperations.load();
+    this.loadBugs();
+  }
+
+  private loadBugs(){
+    this.bugs$ = this.bugOperations.load();
   }
 
   /* getClosedCount():number { 
@@ -30,12 +35,14 @@ export class BugsComponent implements OnInit {
     return  this.bugsList.reduce((result, bug) => bug.isClosed ? result + 1 : result, 0);
   } */
 
-  onAddNewClick(){
-    this.bugOperations.createNew(this.newBugName);
+  onNewBugCreated(newBug : Bug){
+    this.loadBugs();
   }
 
   onRemoveClick(bugToRemove : Bug){
-    this.bugOperations.remove(bugToRemove);
+    this.bugOperations
+      .remove(bugToRemove)
+      .subscribe(() => this.loadBugs())
   }
 
   onRemoveClosedClick() {
@@ -43,7 +50,9 @@ export class BugsComponent implements OnInit {
   }
 
   onBugNameClick(bugToToggle : Bug){
-    this.bugOperations.toggle(bugToToggle);
+    this.bugOperations
+      .toggle(bugToToggle)
+      .subscribe(() => this.loadBugs())
   }
 
 
