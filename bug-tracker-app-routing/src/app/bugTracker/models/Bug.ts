@@ -3,5 +3,6 @@ export interface Bug{
 	name : string,
 	isClosed : boolean,
 	createdAt : Date,
-	desc : string
+	desc : string,
+	isActive : boolean
 };

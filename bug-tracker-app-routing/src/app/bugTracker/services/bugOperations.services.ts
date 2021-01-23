@@ -18,7 +18,8 @@ export class BugOperationsService{
 			name : bugName,
 			isClosed : false,
 			createdAt : new Date(),
-			desc : 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur aliquam id pariatur ipsa expedita nesciunt doloribus facilis architecto quisquam totam veniam odio, minima, labore deleniti, neque nam quia amet eveniet.'
+			desc : 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur aliquam id pariatur ipsa expedita nesciunt doloribus facilis architecto quisquam totam veniam odio, minima, labore deleniti, neque nam quia amet eveniet.',
+			isActive : true
 		};
 		return this.bugServer.save(newBug);
 	}

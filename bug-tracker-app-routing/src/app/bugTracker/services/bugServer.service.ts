@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Bug } from '../models/Bug';
 import { HttpClient} from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class BugServerService {
@@ -23,7 +24,10 @@ export class BugServerService {
 
 	getAll() : Observable<Bug[]> {
 		return this.httpClient
-			.get<Bug[]>(this.baseUrl);
+			.get<Bug[]>(this.baseUrl)
+			.pipe(
+				map(bugs => bugs.filter(bug => bug.isActive))
+			)
 			
 	}
 	get(id) : Observable<Bug>{

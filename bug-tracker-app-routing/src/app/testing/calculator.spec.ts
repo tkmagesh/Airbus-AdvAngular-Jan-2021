@@ -1,20 +1,26 @@
+import { TestBed } from '@angular/core/testing';
 import { Calculator } from './calculator';
 import { Logger } from './logger';
 
 describe('Calculator', () => {
-    /* let calc: Calculator;
-    let loggerMock ; */
+    let calc: Calculator;
+     let loggerMock ; 
 
     beforeEach(() => {
-        
-        
+        loggerMock = jasmine.createSpyObj("Logger", {"log" : undefined,  "formattedLogMessage" : `Add operation, 10, 20`});
+
+        TestBed.configureTestingModule({
+            providers : [
+                Calculator,
+                { provide : Logger, useValue : loggerMock }
+            ]
+        })
+        calc = TestBed.inject<Calculator>(Calculator);
     })
 
     it('should add the given numbers', () => {
         //arrange
-        let loggerMock = jasmine.createSpyObj("Logger", {"log" : undefined,  "formattedLogMessage" : `Add operation, 10, 20`}),
-            calc = new Calculator(loggerMock),
-            x = 10,
+        let x = 10,
             y = 20,
             expectedResult = 30;
 

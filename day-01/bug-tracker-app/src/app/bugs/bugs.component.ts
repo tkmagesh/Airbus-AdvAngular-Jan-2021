@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Bug } from './models/bug';
 import { BugList } from './models/bugList'
 import { BugOperationsService } from './services/bugOperations.service';
@@ -13,7 +14,9 @@ export class BugsComponent implements OnInit {
 
   newBugName : string = '';
 
-  bugs$ ?: Observable<Bug[]> ;
+  bugs$? : Observable<Bug[]>;
+  activeBugs$?: Observable<Bug[]>;
+  InactiveBugs$? : Observable<Bug[]>;
 
   sortAttr : string = '';
   sortDesc : boolean = false;
@@ -28,6 +31,12 @@ export class BugsComponent implements OnInit {
 
   private loadBugs(){
     this.bugs$ = this.bugOperations.load();
+    this.activeBugs$ = this.bugs$.pipe(
+      map(bugs => bugs.filter(bug => bug.active))
+    );
+    this.InactiveBugs$ = this.bugs$.pipe(
+      map(bugs => bugs.filter(bug => !bug.active))
+    );
   }
 
   /* getClosedCount():number { 
