@@ -206,3 +206,5 @@ Growing object-oriented software, guided by tests
 
 
 
+Code coverage
+    ng test --code-coverage
