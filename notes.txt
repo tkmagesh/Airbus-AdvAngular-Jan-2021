@@ -115,3 +115,94 @@ Source of async
 rxjs
     Observable, operators
     https://rxjs.dev/
+
+
+
+Routing
+
+www.amazon.in
+www.amazon.in/electronics
+www.amazon.in/electronics/mobile-phones
+www.amazon.in/electronics/mobile-phones/google
+www.amazon.in/electronics/mobile-phones/google/pixel-2
+www.amazon.in/electronics/mobile-phones/google/pixel-2/reviews
+
+Outlook
+Outlook/Inbox
+Outlook/Inbox/Projects
+Outlook/Inbox/Projects/payroll-master
+Outlook/Inbox/Projects/payroll-master/bugs
+Outlook/Inbox/Projects/payroll-master/bugs/bug-101
+
+
+Angular 2 - Angular Router 3
+Angular 4 - Angular Router 4
+
+Browser
+    Http Client
+    HTML Document Renderer
+
+Browser (Virtual OS)
+    Data Storage
+        LocalStorage
+        SessionStorage
+        IndexedDB
+
+    File System
+        File System Api
+
+    Realtime updates
+        Server Sent Events
+        WebSockets
+        WebRTC
+
+    Multithreading
+        Web Workers
+
+    Offline Access
+        Offline Application Cache
+        Server Worker
+
+    Peripherals
+        API
+
+DIP (Dependency Inversion Principle)
+    Dependencies SHOULD NOT BE created and used at the same place
+
+
+OCP (Open Closed Principle)
+    Open for extension and Closed for modification
+
+
+class A{
+    constructor(B b){
+
+    }
+    m1(){
+        b.doSomething()
+    }
+}
+
+Class B{
+    constructor(C c){
+
+    }
+}
+
+class D{
+    constructor(e E){
+
+    }
+}
+
+A a = new A(new B(new C(new D(new E))));
+Dependency Injector
+
+DI.get(typeof A)
+
+Agile Principles Patterns and Practices (Robert C Martin)
+Growing object-oriented software, guided by tests
+
+
+
+
